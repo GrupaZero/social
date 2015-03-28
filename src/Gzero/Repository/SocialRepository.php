@@ -77,12 +77,27 @@ class SocialRepository {
      */
     private function parseServiceResponse($serviceName, $response)
     {
-        return [
-            'hasSocialIntegrations' => true,
-            'email' => 'test@test.pl',
-            'password' => '',
-            'firstName' => '',
-            'lastName' => '',
+        $userData = [
+            'hasSocialIntegrations' => true
         ];
+        switch ($serviceName) {
+            case 'facebook':
+                $userData['email']     = $response['email'];
+                $userData['firstName'] = $response['first_name'];
+                $userData['lastName']  = $response['last_name'];
+                break;
+            case 'google':
+                $userData['email']     = $response['email'];
+                $userData['firstName'] = $response['given_name'];
+                $userData['lastName']  = $response['family_name'];
+                break;
+            case 'twitter':
+                $name                  = explode(" ", $response['name']);
+                $userData['email']     = uniqid('empty_');
+                $userData['firstName'] = $name[0];
+                $userData['lastName']  = $name[1];
+                break;
+        }
+        return $userData;
     }
 }
