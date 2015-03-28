@@ -34,6 +34,7 @@ class ServiceProvider extends SP {
     public function boot()
     {
         $this->registerRoutes();
+        App::register('Gzero\OAuth\OAuthServiceProvider');
     }
 
     /**

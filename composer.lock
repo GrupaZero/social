@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8eee4c514b3da7fc87cdbbdb7978249",
+    "hash": "7e038ee774a115022ef2fb6d3ac87ff8",
     "packages": [
         {
             "name": "gzero/core",
@@ -83,6 +83,54 @@
                 }
             ],
             "time": "2015-01-25 13:38:03"
+        },
+        {
+            "name": "gzero/laravel-oauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AdrianSkierniewski/laravel-oauth.git",
+                "reference": "7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AdrianSkierniewski/laravel-oauth/zipball/7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2",
+                "reference": "7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2",
+                "shasum": ""
+            },
+            "require": {
+                "lusitanian/oauth": "0.3.*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "illuminate/session": "4.*",
+                "illuminate/support": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Gzero\\OAuth": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Skierniewski",
+                    "email": "adrian.skierniewski@gmail.com",
+                    "homepage": "https://github.com/AdrianSkierniewski"
+                }
+            ],
+            "description": "Laravel 4 Oauth1/2 integration",
+            "keywords": [
+                "Lusitanian",
+                "laravel",
+                "oauth",
+                "php"
+            ],
+            "time": "2014-05-09 11:40:45"
         },
         {
             "name": "gzero/repository",
@@ -314,6 +362,68 @@
                 }
             ],
             "time": "2015-01-27 20:51:43"
+        },
+        {
+            "name": "lusitanian/oauth",
+            "version": "v0.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
+                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/ac5a1cd5a4519143728dce2213936eea302edf8a",
+                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "predis/predis": "0.8.*@dev",
+                "symfony/http-foundation": "~2.1"
+            },
+            "suggest": {
+                "ext-openssl": "Allows for usage of secure connections with the stream-based HTTP client.",
+                "predis/predis": "Allows using the Redis storage backend.",
+                "symfony/http-foundation": "Allows using the Symfony Session storage backend."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "OAuth": "src",
+                    "OAuth\\Unit": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Desberg",
+                    "email": "david@daviddesberg.com"
+                },
+                {
+                    "name": "Pieter Hordijk",
+                    "email": "info@pieterhordijk.com"
+                }
+            ],
+            "description": "PHP 5.3+ oAuth 1/2 Library",
+            "keywords": [
+                "Authentication",
+                "authorization",
+                "oauth",
+                "security"
+            ],
+            "time": "2014-09-05 15:19:58"
         },
         {
             "name": "nesbot/carbon",
@@ -1718,7 +1828,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "gzero/core": 20,
-        "gzero/repository": 20
+        "gzero/repository": 20,
+        "gzero/laravel-oauth": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
