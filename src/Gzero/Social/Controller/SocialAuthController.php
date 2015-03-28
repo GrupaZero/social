@@ -1,6 +1,8 @@
 <?php namespace Gzero\Social\Controller;
 
+use Gzero\OAuth\OAuth;
 use Gzero\Social\SocialException;
+use Gzero\Social\SocialLoginService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -25,11 +27,19 @@ use Illuminate\Support\Facades\URL;
  */
 class SocialAuthController extends Controller {
 
+    /**
+     * @var OAuth
+     */
     protected $oauth;
+    /**
+     * @var SocialLoginService
+     */
+    protected $authService;
 
-    public function __construct()
+    public function __construct(SocialLoginService $auth)
     {
         $this->oauth = App::make('oauth');
+        $this->authService = $auth;
     }
 
     /**
@@ -99,7 +109,7 @@ class SocialAuthController extends Controller {
             } else {
                 throw new SocialException('Social login failed');
             }
-            //User::socialLogin($serviceName . '_' . $result['id'], $result, $serviceName);
+            $this->authService->login($serviceName, $result);
             return Redirect::to(Session::get('url.intended'));
         } catch (SocialException $e) {
             /**@TODO Better way to handle exceptions on production */

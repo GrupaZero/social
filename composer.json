@@ -13,7 +13,8 @@
         "php": ">=5.4.0",
         "gzero/core": "dev-master",
         "gzero/repository": "dev-master",
-        "gzero/laravel-oauth": "@dev"
+        "gzero/laravel-oauth": "@dev",
+        "illuminate/auth": "4.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "1.4.0",
