@@ -46,7 +46,7 @@ class SocialRepository {
      */
     public function getUserIdBySocialId($socialId, $serviceName)
     {
-        return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->first();
+        return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->pluck('userId');
     }
 
     /**
@@ -78,22 +78,20 @@ class SocialRepository {
     private function parseServiceResponse($serviceName, $response)
     {
         $userData = [
-            'hasSocialIntegrations' => true
+            'hasSocialIntegrations' => true,
+            'email'                 => uniqid('social_', true) // set unique email placeholder
         ];
         switch ($serviceName) {
             case 'facebook':
-                $userData['email']     = $response['email'];
                 $userData['firstName'] = $response['first_name'];
                 $userData['lastName']  = $response['last_name'];
                 break;
             case 'google':
-                $userData['email']     = $response['email'];
                 $userData['firstName'] = $response['given_name'];
                 $userData['lastName']  = $response['family_name'];
                 break;
             case 'twitter':
                 $name                  = explode(" ", $response['name']);
-                $userData['email']     = uniqid('empty_');
                 $userData['firstName'] = $name[0];
                 $userData['lastName']  = $name[1];
                 break;
