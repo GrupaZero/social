@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration {
+class CreateSocial extends Migration {
 
     /**
      * Run the migrations.
@@ -16,9 +16,11 @@ class CreateUsersTable extends Migration {
             'SocialIntegrations',
             function (Blueprint $table) {
                 $table->increments('id');
+                $table->integer('userId')->unsigned()->nullable();
                 $table->string('socialId')->unique();
                 $table->timestamp('createdAt');
                 $table->timestamp('updatedAt');
+                $table->foreign('userId')->references('id')->on('Users')->onDelete('CASCADE');
             }
         );
         Schema::table(
