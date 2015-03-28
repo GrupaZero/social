@@ -13,15 +13,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrupaZero/core.git",
-                "reference": "d5df62f33a65d6a6915106c2e8a82bb3ceb04588"
+                "reference": "5f7cdc0394bec9163a1a525253c8bdd3b93c6780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrupaZero/core/zipball/d5df62f33a65d6a6915106c2e8a82bb3ceb04588",
-                "reference": "d5df62f33a65d6a6915106c2e8a82bb3ceb04588",
+                "url": "https://api.github.com/repos/GrupaZero/core/zipball/5f7cdc0394bec9163a1a525253c8bdd3b93c6780",
+                "reference": "5f7cdc0394bec9163a1a525253c8bdd3b93c6780",
                 "shasum": ""
             },
             "require": {
+                "illuminate/support": "4.2.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -43,7 +44,7 @@
                     "email": "adrian.skierniewski@gmail.com"
                 }
             ],
-            "time": "2015-02-21 11:57:19"
+            "time": "2015-03-28 10:13:48"
         },
         {
             "name": "gzero/entity",
@@ -52,15 +53,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrupaZero/entity.git",
-                "reference": "8cdcb589c411e43b02e185e5139139ea8c943eaa"
+                "reference": "d2a9f88aef128ade56ad0035e90bfbb857c4bf84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrupaZero/entity/zipball/8cdcb589c411e43b02e185e5139139ea8c943eaa",
-                "reference": "8cdcb589c411e43b02e185e5139139ea8c943eaa",
+                "url": "https://api.github.com/repos/GrupaZero/entity/zipball/d2a9f88aef128ade56ad0035e90bfbb857c4bf84",
+                "reference": "d2a9f88aef128ade56ad0035e90bfbb857c4bf84",
                 "shasum": ""
             },
             "require": {
+                "illuminate/database": "4.2.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -82,7 +84,7 @@
                     "email": "adrian.skierniewski@gmail.com"
                 }
             ],
-            "time": "2015-01-25 13:38:03"
+            "time": "2015-03-28 10:13:48"
         },
         {
             "name": "gzero/laravel-oauth",
@@ -90,12 +92,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AdrianSkierniewski/laravel-oauth.git",
-                "reference": "7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2"
+                "reference": "facba2aa780669c1cf74de10b37c2c71a43ef156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AdrianSkierniewski/laravel-oauth/zipball/7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2",
-                "reference": "7305d8c0a81f9bb2e5629c11f0bcd2cae2538cd2",
+                "url": "https://api.github.com/repos/AdrianSkierniewski/laravel-oauth/zipball/facba2aa780669c1cf74de10b37c2c71a43ef156",
+                "reference": "facba2aa780669c1cf74de10b37c2c71a43ef156",
                 "shasum": ""
             },
             "require": {
@@ -119,8 +121,7 @@
             "authors": [
                 {
                     "name": "Adrian Skierniewski",
-                    "email": "adrian.skierniewski@gmail.com",
-                    "homepage": "https://github.com/AdrianSkierniewski"
+                    "email": "adrian.skierniewski@gmail.com"
                 }
             ],
             "description": "Laravel 4 Oauth1/2 integration",
@@ -130,7 +131,7 @@
                 "oauth",
                 "php"
             ],
-            "time": "2014-05-09 11:40:45"
+            "time": "2015-03-28 11:07:46"
         },
         {
             "name": "gzero/repository",
@@ -139,12 +140,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrupaZero/repository.git",
-                "reference": "7b3b84163904137c1d30691311e8159f3033abde"
+                "reference": "01ebbb69e5ea17d5daad4b6b8014781566522edc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrupaZero/repository/zipball/7b3b84163904137c1d30691311e8159f3033abde",
-                "reference": "7b3b84163904137c1d30691311e8159f3033abde",
+                "url": "https://api.github.com/repos/GrupaZero/repository/zipball/01ebbb69e5ea17d5daad4b6b8014781566522edc",
+                "reference": "01ebbb69e5ea17d5daad4b6b8014781566522edc",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +173,7 @@
                     "email": "adrian.skierniewski@gmail.com"
                 }
             ],
-            "time": "2015-02-22 10:04:33"
+            "time": "2015-03-28 10:13:48"
         },
         {
             "name": "illuminate/container",

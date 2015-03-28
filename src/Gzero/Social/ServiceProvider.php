@@ -1,5 +1,8 @@
 <?php namespace Gzero\Social;
 
+use Gzero\OAuth\LaravelSession;
+use Gzero\OAuth\OAuth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider as SP;
 
 /**
@@ -17,16 +20,6 @@ use Illuminate\Support\ServiceProvider as SP;
 class ServiceProvider extends SP {
 
     /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->bind();
-    }
-
-    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -34,7 +27,18 @@ class ServiceProvider extends SP {
     public function boot()
     {
         $this->registerRoutes();
-        $this->app->register('Gzero\OAuth\OAuthServiceProvider');
+        $this->package('gzero/social', 'gzero-social');
+        $this->bind();
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        // ...
     }
 
     /**
@@ -54,13 +58,13 @@ class ServiceProvider extends SP {
      */
     private function bind()
     {
-        //$this->app->bind(
-        //    'League\Fractal\Manager',
-        //    function () {
-        //        $manager = new Manager();
-        //        $manager->setSerializer(new ArraySerializer());
-        //        return $manager;
-        //    }
-        //);
+        $this->app['oauth'] = $this->app->share(
+            function ($app) {
+                return new OAuth(
+                    $this->app['config']->get('gzero-social::services'), // cfg
+                    new LaravelSession($this->app->make('session')) // session
+                );
+            }
+        );
     }
 }
