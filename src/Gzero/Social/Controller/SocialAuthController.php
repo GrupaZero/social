@@ -1,11 +1,14 @@
 <?php namespace Gzero\Social\Controller;
 
+use Gzero\Social\SocialException;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
 /**
@@ -91,15 +94,16 @@ class SocialAuthController extends Controller {
                         );
                         break;
                     default:
-                        throw new Exception('Unsupported OAuth2 service');
+                        throw new SocialException('Unsupported OAuth2 service');
                 }
             } else {
-                throw new Exception('Something wrong with the callback');
+                throw new SocialException('Social login failed');
             }
             //User::socialLogin($serviceName . '_' . $result['id'], $result, $serviceName);
             return Redirect::to(Session::get('url.intended'));
-        } catch (Exception $e) {
+        } catch (SocialException $e) {
             /**@TODO Better way to handle exceptions on production */
+            Log::error('Social login failed: ' . print_r(Input::all(), true));
             return App::abort(500, $e->getMessage());
         }
     }
