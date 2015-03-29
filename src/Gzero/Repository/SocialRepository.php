@@ -30,17 +30,21 @@ class SocialRepository {
     private $userRepo;
 
     /**
-     * @param UserRepository $userRepo
+     * Social repository constructor.
+     *
+     * @param UserRepository $userRepo User model
      */
     public function __construct(UserRepository $userRepo)
     {
-        $this->builder = \App::make('db');
+        $this->builder  = \App::make('db');
         $this->userRepo = $userRepo;
     }
 
     /**
-     * @param $socialId
-     * @param $serviceName
+     * Function retrieve a user by the given social id and social service name.
+     *
+     * @param $socialId    int user social id
+     * @param $serviceName string name of social service
      *
      * @return mixed|static
      */
@@ -49,19 +53,27 @@ class SocialRepository {
         return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->pluck('userId');
     }
 
+
     /**
-     * @param $serviceName
-     * @param $response
+     * Function creates new user based on social service response and create relation with social integration in database.
+     *
+     * @param $serviceName string name of social service
+     * @param $response    array response data
+     *
+     * @return User
      */
     public function createNewUser($serviceName, $response)
     {
         $data = $this->parseServiceResponse($serviceName, $response);
         $user = $this->userRepo->create($data);
+        // create relation for new user and social integration
         $this->newQB()->insert(['userId' => $user->id, 'socialId' => $serviceName . '_' . $response['id']]);
         return $user;
     }
 
     /**
+     * Database query builder.
+     *
      * @return Builder
      */
     private function newQB()
@@ -70,10 +82,12 @@ class SocialRepository {
     }
 
     /**
-     * @param $serviceName
-     * @param $response
+     * Function parses social service response and prepares user data to insert to database.
      *
-     * @return array
+     * @param $serviceName string name of parsed service
+     * @param $response    array response data
+     *
+     * @return array parsed user data for database insertion
      */
     private function parseServiceResponse($serviceName, $response)
     {

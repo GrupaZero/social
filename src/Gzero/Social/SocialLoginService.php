@@ -39,10 +39,10 @@ class SocialLoginService {
     }
 
     /**
-     * Login using social service
+     * Login using social service.
      *
-     * @param $serviceName
-     * @param $response
+     * @param $serviceName string social service name
+     * @param $response    array response data
      */
     public function login($serviceName, $response)
     {

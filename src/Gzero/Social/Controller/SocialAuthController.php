@@ -31,6 +31,7 @@ class SocialAuthController extends Controller {
      * @var OAuth
      */
     protected $oauth;
+
     /**
      * @var SocialLoginService
      */
@@ -38,12 +39,14 @@ class SocialAuthController extends Controller {
 
     public function __construct(SocialLoginService $auth)
     {
-        $this->oauth = App::make('oauth');
+        $this->oauth       = App::make('oauth');
         $this->authService = $auth;
     }
 
     /**
-     * @param $serviceName
+     * Function responsible for login the user by the given social service.
+     *
+     * @param $serviceName string social service name
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -55,7 +58,7 @@ class SocialAuthController extends Controller {
         $service = $this->makeSocialService($serviceName);
         if ($serviceName === 'twitter') { // OAuth1 needs different approach
             $token = $service->requestRequestToken();
-            $url = $service->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
+            $url   = $service->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
         } else {
             if ($service) {
                 $url = (string) $service->getAuthorizationUri();
@@ -67,20 +70,22 @@ class SocialAuthController extends Controller {
     }
 
     /**
-     * @param $serviceName
+     * Function responsible for handle a callback request from the given social service.
+     *
+     * @param $serviceName string social service name
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function socialCallback($serviceName)
     {
-        if (Auth::check()) {
+        if (Auth::check()) { // user already logged in
             return Redirect::to('/');
         }
         try {
-            $code = Input::get('code');
-            $oauthToken = Input::get('oauth_token');
+            $code          = Input::get('code');
+            $oauthToken    = Input::get('oauth_token');
             $oauthVerifier = Input::get('oauth_verifier');
-            $service = $this->makeSocialService($serviceName);
+            $service       = $this->makeSocialService($serviceName);
             if ($serviceName == 'twitter') { // OAuth1 needs different approach
                 if (!empty($oauthToken) and !empty($oauthVerifier)) {
                     $token = $service->getStorage()->retrieveAccessToken('Twitter');
@@ -119,7 +124,9 @@ class SocialAuthController extends Controller {
     }
 
     /**
-     * @param $serviceName
+     * Function responsible for bootstrap the given social service.
+     *
+     * @param $serviceName string social service name
      *
      * @return \Gzero\Oauth\Oauth
      */
