@@ -1,6 +1,7 @@
 <?php namespace Gzero\Social\Controller;
 
 use Gzero\OAuth\OAuth;
+use Gzero\Repository\SocialRepository;
 use Gzero\Social\SocialException;
 use Gzero\Social\SocialLoginService;
 use Illuminate\Routing\Controller;
@@ -37,9 +38,10 @@ class SocialAuthController extends Controller {
      */
     protected $authService;
 
-    public function __construct(SocialLoginService $auth)
+    public function __construct(SocialLoginService $auth, SocialRepository $socialRepo)
     {
         $this->oauth       = App::make('oauth');
+        $this->repo        = $socialRepo;
         $this->authService = $auth;
     }
 
@@ -52,9 +54,6 @@ class SocialAuthController extends Controller {
      */
     public function socialLogin($serviceName)
     {
-        if (Auth::check()) {
-            return Redirect::to('/');
-        }
         $service = $this->makeSocialService($serviceName);
         if ($serviceName === 'twitter') { // OAuth1 needs different approach
             $token = $service->requestRequestToken();
@@ -78,9 +77,6 @@ class SocialAuthController extends Controller {
      */
     public function socialCallback($serviceName)
     {
-        if (Auth::check()) { // user already logged in
-            return Redirect::to('/');
-        }
         try {
             $code          = Input::get('code');
             $oauthToken    = Input::get('oauth_token');
@@ -117,10 +113,42 @@ class SocialAuthController extends Controller {
             $this->authService->login($serviceName, $result);
             return Redirect::to(Session::get('url.intended'));
         } catch (SocialException $e) {
-            /**@TODO Better way to handle exceptions on production */
             Log::error('Social login failed: ' . print_r(Input::all(), true));
-            return App::abort(500, $e->getMessage());
+            if (Session::has('url.intended')) { // If redirect url exists show translated error to the user
+                $reditectUrl = Session::get('url.intended');
+                Session::forget('url.intended'); // remove intended url
+                // Set flash message
+                Session::flash(
+                    'messages',
+                    [
+                        [
+                            'code' => 'error',
+                            'text' => $e->getMessage()
+                        ]
+                    ]
+                );
+                return Redirect::to($reditectUrl);
+            } else {
+                return App::abort(500, $e->getMessage());
+            }
         }
+    }
+
+    /**
+     * User account page
+     *
+     */
+    public function connectedServices()
+    {
+        /**@TODO we need proper user menu method */
+        return \View::make(
+            'gzero-social::connectedServices',
+            [
+                'menu'           => App::make('user.menu')->getMenu(),
+                'services'       => Config::get('gzero-social::services'),
+                'activeServices' => $this->repo->getUserSocialIds(Auth::user()->id)
+            ]
+        );
     }
 
     /**

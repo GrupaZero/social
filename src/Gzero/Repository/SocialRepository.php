@@ -41,6 +41,18 @@ class SocialRepository {
     }
 
     /**
+     * Function retrieve social services by the given user id.
+     *
+     * @param $socialId    int social id
+     *
+     * @return mixed|static
+     */
+    public function getSocialId($socialId)
+    {
+        return $this->newQB()->where('socialId', '=', $socialId)->first();
+    }
+
+    /**
      * Function retrieve a user by the given social id and social service name.
      *
      * @param $socialId    int user social id
@@ -53,6 +65,17 @@ class SocialRepository {
         return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->pluck('userId');
     }
 
+    /**
+     * Function retrieve social services by the given user id.
+     *
+     * @param $userId    int user id
+     *
+     * @return mixed|static
+     */
+    public function getUserSocialIds($userId)
+    {
+        return $this->newQB()->where('userId', '=', $userId)->lists('socialId');
+    }
 
     /**
      * Function creates new user based on social service response and create relation with social integration in database.
@@ -67,8 +90,23 @@ class SocialRepository {
         $data = $this->parseServiceResponse($serviceName, $response);
         $user = $this->userRepo->create($data);
         // create relation for new user and social integration
-        $this->newQB()->insert(['userId' => $user->id, 'socialId' => $serviceName . '_' . $response['id']]);
+        $this->addSocialRelation($user, $serviceName, $response);
         return $user;
+    }
+
+    /**
+     * Function creates create relation for given user and social integration.
+     *
+     * @param $user
+     * @param $serviceName string name of social service
+     * @param $response    array response data
+     *
+     * @return mixed
+     */
+    public function addSocialRelation($user, $serviceName, $response)
+    {
+        // create relation for new user and social integration
+        return $this->newQB()->insert(['userId' => $user->id, 'socialId' => $serviceName . '_' . $response['id']]);
     }
 
     /**

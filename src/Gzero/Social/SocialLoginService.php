@@ -43,15 +43,32 @@ class SocialLoginService {
      *
      * @param $serviceName string social service name
      * @param $response    array response data
+     *
+     * @throws SocialException
      */
     public function login($serviceName, $response)
     {
         $userId = $this->repo->getUserIdBySocialId($response['id'], $serviceName);
-        if ($userId) {
-            $this->auth->loginUsingId($userId);
+        if (\Auth::check()) { // user already logged and service has not been connected
+            $user = \Auth::user();
+            if ($userId) { // This service has already been connected
+                \Session::put('url.intended', \URL::route('connectedServices'));
+                throw new SocialException(
+                    \Lang::get(
+                        'gzero-social::common.serviceAlreadyConnectedMessage',
+                        ['serviceName' => \Str::title($serviceName)]
+                    )
+                );
+            } else { // create connection for new service
+                $this->repo->addSocialRelation($user, $serviceName, $response);
+            }
         } else {
-            $user = $this->repo->createNewUser($serviceName, $response);
-            $this->auth->login($user);
+            if ($userId) { // login user with this service
+                $this->auth->loginUsingId($userId);
+            } else { // create new user
+                $user = $this->repo->createNewUser($serviceName, $response);
+                $this->auth->login($user);
+            }
         }
     }
 }

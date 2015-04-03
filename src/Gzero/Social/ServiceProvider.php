@@ -28,6 +28,7 @@ class ServiceProvider extends SP {
     {
         $this->registerRoutes();
         $this->package('gzero/social', 'gzero-social');
+        $this->addLinksToUserMenu();
         $this->bind();
     }
 
@@ -66,5 +67,13 @@ class ServiceProvider extends SP {
                 );
             }
         );
+    }
+
+    /**
+     * Add additional links to user account menu
+     */
+    public function addLinksToUserMenu()
+    {
+        $this->app['user.menu']->addLink(\URL::route('connectedServices'), \Lang::get('gzero-social::common.connectedServices'));
     }
 }
