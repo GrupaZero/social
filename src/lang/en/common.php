@@ -8,8 +8,11 @@ return [
     'connectedServices'              => 'Connected Services',
     'serviceAlreadyConnectedMessage' => 'This :serviceName account is already connected!',
     'connectInfo'                    => [
-        'facebook' => 'Connect with your Facebook account.',
-        'google'   => 'Connect with your Google account.',
-        'twitter'  => 'Connect with your Twitter account.',
+        'facebook' => 'Connect the :siteName account with your Facebook account.
+        This will give you the ability to sign in to :domain using your Google account.',
+        'google' => 'Connect the :siteName account with your Facebook account.
+        This will give you the ability to sign in to :domain using your Google account.',
+        'twitter' => 'Connect the :siteName account with your Twitter account.
+        This will give you the ability to sign in to :domain using your Twitter account.',
     ],
 ];

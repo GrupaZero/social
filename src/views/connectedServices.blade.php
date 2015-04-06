@@ -24,12 +24,22 @@
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
                     @if(empty(preg_grep('/'.$key.'/', $activeServices)))
-                        <p>@lang('gzero-social::common.connectInfo.' . $key)</p>
+                        <p>
+                        @lang(
+                            'gzero-social::common.connectInfo.' . $key,
+                            [
+                            'siteName' => Config::get('gzero.siteName'),
+                            'domain'   => Config::get('gzero.domain')
+                            ]
+                        )
+                        </p>
                         <a class="btn btn-default" href="{{ Url::route('socialLogin',[$key]) }}">
                             @lang('gzero-social::common.connect')
                         </a>
                     @else
-                        <h3 class="margin-zero-top text-success">@lang('gzero-social::common.connected') <i class="fa fa-check-circle-o"></i></h3>
+                        <h3 class="margin-zero-top text-success">
+                            @lang('gzero-social::common.connected') <i class="fa fa-check-circle-o"></i>
+                        </h3>
                     @endif
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <?php namespace Gzero\Repository;
 
+use Gzero\Entity\User;
 use Illuminate\Database\Query\Builder;
 
 /**
@@ -95,15 +96,33 @@ class SocialRepository {
     }
 
     /**
-     * Function creates create relation for given user and social integration.
+     * Function adds new social account for existing user.
      *
-     * @param $user
+     * @param $user        User user entity
+     * @param $serviceName string name of social service
+     * @param $response    array response data
+     *
+     * @return User
+     */
+    public function addUserSocialAccount(User $user, $serviceName, $response)
+    {
+        $user->hasSocialIntegrations = true;
+        $user->save();
+        // create relation for new user and social integration
+        $this->addSocialRelation($user, $serviceName, $response);
+        return $user;
+    }
+
+    /**
+     * Function creates relation for given user and social integration.
+     *
+     * @param $user        User user entity
      * @param $serviceName string name of social service
      * @param $response    array response data
      *
      * @return mixed
      */
-    public function addSocialRelation($user, $serviceName, $response)
+    public function addSocialRelation(User $user, $serviceName, $response)
     {
         // create relation for new user and social integration
         return $this->newQB()->insert(['userId' => $user->id, 'socialId' => $serviceName . '_' . $response['id']]);

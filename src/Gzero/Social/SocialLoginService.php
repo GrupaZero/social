@@ -60,7 +60,7 @@ class SocialLoginService {
                     )
                 );
             } else { // create connection for new service
-                $this->repo->addSocialRelation($user, $serviceName, $response);
+                $this->repo->addUserSocialAccount($user, $serviceName, $response);
             }
         } else {
             if ($userId) { // login user with this service

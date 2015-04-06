@@ -8,8 +8,11 @@ return [
     'connectedServices'              => 'Usługi powiązane',
     'serviceAlreadyConnectedMessage' => 'To konto (:serviceName) jest już powiązane!',
     'connectInfo'                    => [
-        'facebook' => 'Połącz konto ze swoim kontem na Facebook-u.',
-        'google'   => 'Połącz konto ze swoim kontem Google.',
-        'twitter'  => 'Połącz konto ze swoim kontem Twitter.',
+        'facebook' => 'Połącz konto :siteName z kontem w serwisie Facebook.
+        Dzięki temu zyskasz możliwość zalogowania się na :domain za pomocą konta Facebook.',
+        'google' => 'Połącz konto :siteName z kontem w serwisie Google.
+        Dzięki temu zyskasz możliwość zalogowania się na :domain za pomocą konta Google.',
+        'twitter' => 'Połącz konto :siteName z kontem w serwisie Twitter.
+        Dzięki temu zyskasz możliwość zalogowania na :domain za pomocą konta Twitter.',
     ],
 ];
