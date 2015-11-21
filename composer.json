@@ -31,5 +31,5 @@
             "src/migrations"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
