@@ -1,9 +1,6 @@
 <?php namespace Gzero\Social;
 
-use Gzero\OAuth\LaravelSession;
-use Gzero\OAuth\OAuth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider as SP;
+use Gzero\Core\AbstractServiceProvider;
 
 /**
  * This file is part of the GZERO CMS package.
@@ -17,7 +14,14 @@ use Illuminate\Support\ServiceProvider as SP;
  * @author     Adrian Skierniewski <adrian.skierniewski@gmail.com>
  * @copyright  Copyright (c) 2014, Adrian Skierniewski
  */
-class ServiceProvider extends SP {
+class ServiceProvider extends AbstractServiceProvider {
+
+    /**
+     * List of additional providers
+     *
+     * @var array
+     */
+    protected $providers = ['Laravel\Socialite\SocialiteServiceProvider'];
 
     /**
      * Bootstrap the application events.
@@ -27,9 +31,7 @@ class ServiceProvider extends SP {
     public function boot()
     {
         $this->registerRoutes();
-        $this->package('gzero/social', 'gzero-social');
         $this->addLinksToUserMenu();
-        $this->bind();
     }
 
     /**
@@ -50,23 +52,6 @@ class ServiceProvider extends SP {
     protected function registerRoutes()
     {
         require_once __DIR__ . '/../../routes.php';
-    }
-
-    /**
-     * Bind additional classes
-     *
-     * @return void
-     */
-    private function bind()
-    {
-        $this->app['oauth'] = $this->app->share(
-            function ($app) {
-                return new OAuth(
-                    $this->app['config']->get('gzero-social::services'), // cfg
-                    new LaravelSession($this->app->make('session')) // session
-                );
-            }
-        );
     }
 
     /**
