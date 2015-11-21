@@ -19,7 +19,6 @@ class CreateSocial extends Migration {
                 $table->integer('userId')->unsigned()->nullable();
                 $table->string('socialId')->unique();
                 $table->timestamp('createdAt');
-                $table->timestamp('updatedAt');
                 $table->foreign('userId')->references('id')->on('Users')->onDelete('CASCADE');
             }
         );

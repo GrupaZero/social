@@ -48,7 +48,7 @@ class SocialLoginService {
      */
     public function login($serviceName, $response)
     {
-        $userId = $this->repo->getUserIdBySocialId($response['id'], $serviceName);
+        $userId = $this->repo->getUserIdBySocialId($response->id, $serviceName);
         if (\Auth::check()) { // user already logged and service has not been connected
             $user = \Auth::user();
             if ($userId) { // This service has already been connected

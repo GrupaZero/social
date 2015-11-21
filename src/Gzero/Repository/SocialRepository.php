@@ -2,6 +2,7 @@
 
 use Gzero\Entity\User;
 use Illuminate\Database\Query\Builder;
+use Laravel\Socialite\AbstractUser;
 
 /**
  * This file is part of the GZERO CMS package.
@@ -81,14 +82,14 @@ class SocialRepository {
     /**
      * Function creates new user based on social service response and create relation with social integration in database.
      *
-     * @param $serviceName string name of social service
-     * @param $response    array response data
+     * @param $serviceName    string name of social service
+     * @param $response       AbstractUser response data
      *
      * @return User
      */
-    public function createNewUser($serviceName, $response)
+    public function createNewUser($serviceName, AbstractUser $response)
     {
-        $data = $this->parseServiceResponse($serviceName, $response);
+        $data = $this->parseServiceResponse($response);
         $user = $this->userRepo->create($data);
         // create relation for new user and social integration
         $this->addSocialRelation($user, $serviceName, $response);
@@ -100,11 +101,11 @@ class SocialRepository {
      *
      * @param $user        User user entity
      * @param $serviceName string name of social service
-     * @param $response    array response data
+     * @param $response    AbstractUser response data
      *
      * @return User
      */
-    public function addUserSocialAccount(User $user, $serviceName, $response)
+    public function addUserSocialAccount(User $user, $serviceName, AbstractUser $response)
     {
         $user->hasSocialIntegrations = true;
         $user->save();
@@ -118,14 +119,20 @@ class SocialRepository {
      *
      * @param $user        User user entity
      * @param $serviceName string name of social service
-     * @param $response    array response data
+     * @param $response    AbstractUser response data
      *
      * @return mixed
      */
-    public function addSocialRelation(User $user, $serviceName, $response)
+    public function addSocialRelation(User $user, $serviceName, AbstractUser $response)
     {
         // create relation for new user and social integration
-        return $this->newQB()->insert(['userId' => $user->id, 'socialId' => $serviceName . '_' . $response['id']]);
+        return $this->newQB()->insert(
+            [
+                'userId'    => $user->id,
+                'socialId'  => $serviceName . '_' . $response->id,
+                'createdAt' => \DB::raw('NOW()')
+            ]
+        );
     }
 
     /**
@@ -141,31 +148,24 @@ class SocialRepository {
     /**
      * Function parses social service response and prepares user data to insert to database.
      *
-     * @param $serviceName string name of parsed service
-     * @param $response    array response data
+     * @param $response        AbstractUser response data
      *
      * @return array parsed user data for database insertion
      */
-    private function parseServiceResponse($serviceName, $response)
+    private function parseServiceResponse(AbstractUser $response)
     {
         $userData = [
             'hasSocialIntegrations' => true,
             'email'                 => uniqid('social_', true) // set unique email placeholder
         ];
-        switch ($serviceName) {
-            case 'facebook':
-                $userData['firstName'] = $response['first_name'];
-                $userData['lastName']  = $response['last_name'];
-                break;
-            case 'google':
-                $userData['firstName'] = $response['given_name'];
-                $userData['lastName']  = $response['family_name'];
-                break;
-            case 'twitter':
-                $name                  = explode(" ", $response['name']);
-                $userData['firstName'] = $name[0];
-                $userData['lastName']  = $name[1];
-                break;
+
+        $name = explode(" ", $response->getName());
+        if (count($name) >= 2) {
+            $userData['firstName'] = $name[0];
+            $userData['lastName']  = $name[1];
+        } else {
+            $userData['firstName'] = 'John';
+            $userData['lastName']  = 'Doe';
         }
         return $userData;
     }

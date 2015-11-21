@@ -1,6 +1,8 @@
 <?php namespace Gzero\Social;
 
 use Gzero\Core\AbstractServiceProvider;
+use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\SocialiteServiceProvider;
 
 /**
  * This file is part of the GZERO CMS package.
@@ -21,7 +23,18 @@ class ServiceProvider extends AbstractServiceProvider {
      *
      * @var array
      */
-    protected $providers = ['Laravel\Socialite\SocialiteServiceProvider'];
+    protected $providers = [
+        SocialiteServiceProvider::class
+    ];
+
+    /**
+     * List of service providers aliases
+     *
+     * @var array
+     */
+    protected $aliases = [
+        Socialite::class,
+    ];
 
     /**
      * Bootstrap the application events.
@@ -41,7 +54,13 @@ class ServiceProvider extends AbstractServiceProvider {
      */
     public function register()
     {
-        // ...
+        parent::register();
+        // @TODO Find other way to update views
+        $this->app['oauth'] = $this->app->share(
+            function ($app) {
+                return 1;
+            }
+        );
     }
 
     /**

@@ -20,7 +20,7 @@ composer update
  - create database schema (remember to set env to dev)
  
 ```
-php artisan migrate --package=gzero/social
+php artisan migrate --path=vendor/gzero/social/src/migrations
 ```
 ## Configuration
 
