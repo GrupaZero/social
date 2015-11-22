@@ -79,12 +79,6 @@ class ServiceProvider extends AbstractServiceProvider {
     public function register()
     {
         parent::register();
-        // @TODO Find other way to update views
-        $this->app['oauth'] = $this->app->share(
-            function ($app) {
-                return 1;
-            }
-        );
     }
 
     /**
@@ -94,7 +88,7 @@ class ServiceProvider extends AbstractServiceProvider {
      */
     protected function registerRoutes()
     {
-        require_once __DIR__ . '/../../routes.php';
+        require __DIR__ . '/../../routes.php';
     }
 
     /**
