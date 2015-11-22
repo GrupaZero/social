@@ -12,11 +12,11 @@
     <h1 class="page-header">@lang('gzero-social::common.connectedServices')</h1>
 
     @foreach($services as $key => $service)
-        @if($service['secret'])
+        @if(isset($service['client_secret']))
             <div class="row">
                 <div class="col-xs-3 col-sm-2 col-md-2">
                     <h5>
-                        <strong>{{ Str::title($key) }}</strong>
+                        <strong>{{ title_case($key) }}</strong>
                     </h5>
                 </div>
                 <div class="col-xs-2 col-sm-1 col-md-1">
@@ -28,8 +28,8 @@
                         @lang(
                             'gzero-social::common.connectInfo.' . $key,
                             [
-                            'siteName' => Config::get('gzero.siteName'),
-                            'domain'   => Config::get('gzero.domain')
+                            'siteName' => config('gzero.siteName'),
+                            'domain'   => config('gzero.domain')
                             ]
                         )
                         </p>

@@ -10,9 +10,9 @@ return [
     'connectInfo'                    => [
         'facebook' => 'Connect the :siteName account with your Facebook account.
         This will give you the ability to sign in to :domain using your Google account.',
-        'google' => 'Connect the :siteName account with your Facebook account.
+        'google'   => 'Connect the :siteName account with your Facebook account.
         This will give you the ability to sign in to :domain using your Google account.',
-        'twitter' => 'Connect the :siteName account with your Twitter account.
+        'twitter'  => 'Connect the :siteName account with your Twitter account.
         This will give you the ability to sign in to :domain using your Twitter account.',
     ],
 ];

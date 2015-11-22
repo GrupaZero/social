@@ -1,9 +1,9 @@
 <?php
 
-Route::group(
-    setMultilangRouting(),
+group(
+    ['prefix' => '_hidden'],
     function () {
-        Route::get(
+        get(
             'social-login/{service}',
             [
                 'as'   => 'socialLogin',
@@ -12,7 +12,7 @@ Route::group(
             ]
         );
 
-        Route::get(
+        get(
             'social-callback/{service}',
             [
                 'as'   => 'socialCallback',
@@ -20,11 +20,16 @@ Route::group(
                     'Gzero\Social\Controller\SocialAuthController@socialCallback'
             ]
         );
+    }
+);
 
-        Route::group(
+group(
+    setMultilangRouting(),
+    function () {
+        group(
             ['prefix' => 'account', 'before' => 'auth'],
             function () {
-                Route::get(
+                get(
                     'connected-services',
                     [
                         'as'   => 'connectedServices',

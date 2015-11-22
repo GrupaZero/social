@@ -3,6 +3,7 @@
 use Gzero\Repository\SocialRepository;
 use Gzero\Repository\UserRepository;
 use Illuminate\Auth\AuthManager;
+use Laravel\Socialite\AbstractUser;
 
 /**
  * This file is part of the GZERO CMS package.
@@ -42,22 +43,19 @@ class SocialLoginService {
      * Login using social service.
      *
      * @param $serviceName string social service name
-     * @param $response    array response data
+     * @param $response    AbstractUser response data
      *
      * @throws SocialException
      */
-    public function login($serviceName, $response)
+    public function login($serviceName, AbstractUser $response)
     {
         $userId = $this->repo->getUserIdBySocialId($response->id, $serviceName);
-        if (\Auth::check()) { // user already logged and service has not been connected
-            $user = \Auth::user();
+        if (auth()->check()) { // user already logged and service has not been connected
+            $user = auth()->user();
             if ($userId) { // This service has already been connected
-                \Session::put('url.intended', \URL::route('connectedServices'));
+                session()->put('url.intended', route('connectedServices'));
                 throw new SocialException(
-                    \Lang::get(
-                        'gzero-social::common.serviceAlreadyConnectedMessage',
-                        ['serviceName' => \Str::title($serviceName)]
-                    )
+                    trans('gzero-social::common.serviceAlreadyConnectedMessage', ['serviceName' => title_case($serviceName)])
                 );
             } else { // create connection for new service
                 $this->repo->addUserSocialAccount($user, $serviceName, $response);

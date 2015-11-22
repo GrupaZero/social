@@ -10,9 +10,9 @@ return [
     'connectInfo'                    => [
         'facebook' => 'Połącz konto :siteName z kontem w serwisie Facebook.
         Dzięki temu zyskasz możliwość zalogowania się na :domain za pomocą konta Facebook.',
-        'google' => 'Połącz konto :siteName z kontem w serwisie Google.
+        'google'   => 'Połącz konto :siteName z kontem w serwisie Google.
         Dzięki temu zyskasz możliwość zalogowania się na :domain za pomocą konta Google.',
-        'twitter' => 'Połącz konto :siteName z kontem w serwisie Twitter.
+        'twitter'  => 'Połącz konto :siteName z kontem w serwisie Twitter.
         Dzięki temu zyskasz możliwość zalogowania na :domain za pomocą konta Twitter.',
     ],
 ];

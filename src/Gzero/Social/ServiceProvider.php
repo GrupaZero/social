@@ -19,6 +19,13 @@ use Laravel\Socialite\SocialiteServiceProvider;
 class ServiceProvider extends AbstractServiceProvider {
 
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
      * List of additional providers
      *
      * @var array
@@ -38,13 +45,30 @@ class ServiceProvider extends AbstractServiceProvider {
 
     /**
      * Bootstrap the application events.
+     * WARNING: Order of execution functions in boot is important, because we're using translations in our routes
      *
      * @return void
      */
     public function boot()
     {
+        $viewPath        = __DIR__ . '/../../resources/views';
+        $translationPath = __DIR__ . '/../../resources/lang';
+        $this->loadViewsFrom($viewPath, 'gzero-social');
+        $this->loadTranslationsFrom($translationPath, 'gzero-social');
         $this->registerRoutes();
         $this->addLinksToUserMenu();
+        $this->publishes(
+            [
+                $viewPath => base_path('resources/views/gzero/social')
+            ],
+            'views'
+        );
+        $this->publishes(
+            [
+                $translationPath => base_path('resources/lang/gzero/social'),
+            ],
+            'lang'
+        );
     }
 
     /**
@@ -80,4 +104,5 @@ class ServiceProvider extends AbstractServiceProvider {
     {
         $this->app['user.menu']->addLink(\URL::route('connectedServices'), \Lang::get('gzero-social::common.connectedServices'));
     }
+
 }

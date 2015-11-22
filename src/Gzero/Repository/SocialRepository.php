@@ -60,11 +60,11 @@ class SocialRepository {
      * @param $socialId    int user social id
      * @param $serviceName string name of social service
      *
-     * @return mixed|static
+     * @return User
      */
     public function getUserIdBySocialId($socialId, $serviceName)
     {
-        return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->pluck('userId');
+        return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->value('userId');
     }
 
     /**
@@ -72,7 +72,7 @@ class SocialRepository {
      *
      * @param $userId    int user id
      *
-     * @return mixed|static
+     * @return array
      */
     public function getUserSocialIds($userId)
     {

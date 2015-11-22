@@ -4,14 +4,8 @@ use Gzero\Repository\SocialRepository;
 use Gzero\Social\SocialException;
 use Gzero\Social\SocialLoginService;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 
 /**
@@ -58,7 +52,7 @@ class SocialAuthController extends Controller {
             $this->setDynamicRedirectUrl($serviceName);
             return $this->socialite->driver($serviceName)->redirect();
         }
-        return Redirect::to('/');
+        return redirect('/');
     }
 
     /**
@@ -74,15 +68,14 @@ class SocialAuthController extends Controller {
             $this->setDynamicRedirectUrl($serviceName);
             $user = $this->socialite->driver($serviceName)->user();
             $this->authService->login($serviceName, $user);
-            return Redirect::to(Session::get('url.intended'));
+            return redirect(session('url.intended', '/'));
         } catch (\Exception $e) {
-            dd($e);
             Log::error('Social login failed: ' . print_r(Input::all(), true));
-            if (Session::has('url.intended')) { // If redirect url exists show translated error to the user
-                $reditectUrl = Session::get('url.intended');
-                Session::forget('url.intended'); // remove intended url
+            if (session()->has('url.intended')) { // If redirect url exists show translated error to the user
+                $reditectUrl = session('url.intended');
+                session()->forget('url.intended'); // remove intended url
                 // Set flash message
-                Session::flash(
+                session()->flash(
                     'messages',
                     [
                         [
@@ -91,9 +84,9 @@ class SocialAuthController extends Controller {
                         ]
                     ]
                 );
-                return Redirect::to($reditectUrl);
+                return redirect($reditectUrl);
             } else {
-                return App::abort(500, $e->getMessage());
+                return app()->abort(500, $e->getMessage());
             }
         }
     }
@@ -108,25 +101,10 @@ class SocialAuthController extends Controller {
         return \View::make(
             'gzero-social::connectedServices',
             [
-                'menu'           => App::make('user.menu')->getMenu(),
-                'services'       => Config::get('gzero-social::services'),
-                'activeServices' => $this->repo->getUserSocialIds(Auth::user()->id)
+                'menu'           => app()->make('user.menu')->getMenu(),
+                'services'       => config('services'),
+                'activeServices' => $this->repo->getUserSocialIds(auth()->user()->id)
             ]
-        );
-    }
-
-    /**
-     * Function responsible for bootstrap the given social service.
-     *
-     * @param $serviceName string social service name
-     *
-     * @return \Gzero\Oauth\Oauth
-     */
-    protected function makeSocialService($serviceName)
-    {
-        return $this->socialite->init(
-            $serviceName,
-            URL::route('socialCallback', [$serviceName])
         );
     }
 

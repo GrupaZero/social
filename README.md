@@ -30,22 +30,23 @@ Add the service provider to platform configuration in `app/config/app.php`
 'Gzero\Social\ServiceProvider'
 ```
 
-### Overriding configuration
+### OAuth credentials
 
-In order to override some of the configuration options publish configuration file:
-
-```
-php artisan config:publish gzero/social
-```
-
-Set required credentials for given service in published package config file
+Set required credentials for given service in services config file
  
  ```PHP
-'services' => [
-        'facebook' => [
-            'key' => 'your app_id',
-            'secret' => 'your secret_key',
-            'scope' => ['email'] // data you want to access
-        ]
-    ]
+ 'google' => [
+     'client_id'     => 'your client_id',
+     'client_secret' => 'your client_secret',
+ ],
+
+ 'facebook' => [
+     'client_id'     => 'your client_id',
+     'client_secret' => 'your client_secret',
+ ],
+
+ 'twitter' => [
+     'client_id'     => 'your client_id',
+     'client_secret' => 'your client_secret',
+ ],
  ```
