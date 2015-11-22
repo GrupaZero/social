@@ -25,7 +25,7 @@ class CreateSocial extends Migration {
         Schema::table(
             'Users',
             function (Blueprint $table) {
-                $table->boolean('hasSocialIntegrations')->default(0)->after('id');
+                $table->boolean('hasSocialIntegrations')->default(0)->after('isAdmin');
             }
         );
     }
