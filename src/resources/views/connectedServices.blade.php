@@ -33,7 +33,7 @@
                             ]
                         )
                         </p>
-                        <a class="btn btn-default" href="{{ Url::route('socialLogin',[$key]) }}">
+                        <a class="btn btn-default connect-btn" href="{{ Url::route('socialLogin',[$key]) }}">
                             @lang('gzero-social::common.connect')
                         </a>
                     @else
@@ -46,4 +46,13 @@
             <hr/>
         @endif
     @endforeach
+@stop
+@section('footerScripts')
+    <script type="text/javascript">
+        $(function () {
+            $('.connect-btn').click(function (event) {
+                Loading.start('body');
+            })
+        });
+    </script>
 @stop

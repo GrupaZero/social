@@ -59,13 +59,13 @@ class ServiceProvider extends AbstractServiceProvider {
         $this->addLinksToUserMenu();
         $this->publishes(
             [
-                $viewPath => base_path('resources/views/gzero/social')
+                $viewPath => base_path('resources/views/vendor/gzero-social')
             ],
             'views'
         );
         $this->publishes(
             [
-                $translationPath => base_path('resources/lang/gzero/social'),
+                $translationPath => base_path('resources/lang/vendor/gzero-social'),
             ],
             'lang'
         );
