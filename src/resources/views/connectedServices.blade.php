@@ -55,4 +55,4 @@
             })
         });
     </script>
-@stop
+@append

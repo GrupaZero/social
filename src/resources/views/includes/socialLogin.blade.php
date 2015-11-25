@@ -20,4 +20,4 @@
             })
         });
     </script>
-@stop
+@append
