@@ -3,18 +3,20 @@
 if (!function_exists('fbOgTags')) {
 
     /**
-     * @param $url
-     * @param $translation
+     * @param string                      $url
+     * @param ContentTranslationPresenter $translation
+     * @param bool|string                 $imgUrl
      *
      * @return mixed
      */
-    function fbOgTags($url, $translation)
+    function fbOgTags($url, $translation, $imgUrl = false)
     {
         return view(
             'gzero-social::fbOgTags',
             [
                 'url'         => $url,
-                'translation' => $translation
+                'translation' => $translation,
+                'imgUrl'      => $imgUrl
             ]
         )->render();
     }
@@ -23,8 +25,8 @@ if (!function_exists('fbOgTags')) {
 if (!function_exists('shareButtons')) {
 
     /**
-     * @param $url
-     * @param $translation
+     * @param string                      $url
+     * @param ContentTranslationPresenter $translation
      *
      * @return mixed
      */
@@ -34,7 +36,7 @@ if (!function_exists('shareButtons')) {
             'gzero-social::shareButtons',
             [
                 'url'         => $url,
-                'translation' => $translation
+                'translation' => $translation,
             ]
         )->render();
     }
