@@ -69,6 +69,7 @@ class ServiceProvider extends AbstractServiceProvider {
             ],
             'lang'
         );
+        $this->registerHelpers();
     }
 
     /**
@@ -97,6 +98,16 @@ class ServiceProvider extends AbstractServiceProvider {
     public function addLinksToUserMenu()
     {
         $this->app['user.menu']->addLink(\URL::route('connectedServices'), \Lang::get('gzero-social::common.connectedServices'));
+    }
+
+    /**
+     * Add additional file to store helpers
+     *
+     * @return void
+     */
+    protected function registerHelpers()
+    {
+        require_once __DIR__ . '/helpers.php';
     }
 
 }
