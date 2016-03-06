@@ -70,7 +70,7 @@ class SocialAuthController extends Controller {
             $this->authService->login($serviceName, $user);
             return redirect(session('url.intended', '/'));
         } catch (\Exception $e) {
-            Log::error('Social login failed: ' . print_r(Input::all(), true));
+            Log::error('Social login failed: ' . $e->getMessage() . ' - ' . print_r(Input::all(), true));
             if (session()->has('url.intended')) { // If redirect url exists show translated error to the user
                 $reditectUrl = session('url.intended');
                 session()->forget('url.intended'); // remove intended url
