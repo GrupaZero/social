@@ -37,7 +37,7 @@
                             @lang('gzero-social::common.connect')
                         </a>
                     @else
-                        <h3 class="margin-zero-top text-success">
+                        <h3 class="mt0 text-success">
                             @lang('gzero-social::common.connected') <i class="fa fa-check-circle-o"></i>
                         </h3>
                     @endif
