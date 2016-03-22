@@ -2,8 +2,8 @@
 
 use Gzero\Repository\SocialRepository;
 use Gzero\Social\SocialException;
+use App\Http\Controllers\BaseController;
 use Gzero\Social\SocialLoginService;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Contracts\Factory as Socialite;
@@ -20,7 +20,7 @@ use Laravel\Socialite\Contracts\Factory as Socialite;
  * @author     Adrian Skierniewski <adrian.skierniewski@gmail.com>
  * @copyright  Copyright (c) 2015, Adrian Skierniewski
  */
-class SocialAuthController extends Controller {
+class SocialAuthController extends BaseController {
 
     /**
      * @var Socialite
@@ -34,6 +34,7 @@ class SocialAuthController extends Controller {
 
     public function __construct(Socialite $socialite, SocialLoginService $auth, SocialRepository $socialRepo)
     {
+        parent::__construct();
         $this->socialite   = $socialite;
         $this->repo        = $socialRepo;
         $this->authService = $auth;
