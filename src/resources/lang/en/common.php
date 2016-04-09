@@ -15,4 +15,6 @@ return [
         'twitter'  => 'Connect the :siteName account with your Twitter account.
         This will give you the ability to sign in to :domain using your Twitter account.',
     ],
+    'emailAlreadyInUseMessage'       => 'User with this email is already registered, please log in and connect this :serviceName
+    account from the panel of the user.',
 ];

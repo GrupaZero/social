@@ -15,4 +15,6 @@ return [
         'twitter'  => 'Połącz konto :siteName z kontem w serwisie Twitter.
         Dzięki temu zyskasz możliwość zalogowania na :domain za pomocą konta Twitter.',
     ],
+    'emailAlreadyInUseMessage'       => 'Użytkownik z tym adresem e-mail jest już zarejestrowany, zaloguj się i połącz konto
+    (:serviceName) z panelu tego użytkownika.',
 ];

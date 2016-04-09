@@ -51,7 +51,7 @@
     <script type="text/javascript">
         $(function () {
             $('.connect-btn').click(function (event) {
-                Loading.start('body');
+                Loading.start('#main-container');
             })
         });
     </script>

@@ -1,6 +1,8 @@
 <?php namespace Gzero\Repository;
 
 use Gzero\Entity\User;
+use Gzero\Social\SocialException;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Query\Builder;
 use Laravel\Socialite\AbstractUser;
 
@@ -86,14 +88,24 @@ class SocialRepository {
      * @param $response       AbstractUser response data
      *
      * @return User
+     * @throws SocialException
      */
     public function createNewUser($serviceName, AbstractUser $response)
     {
-        $data = $this->parseServiceResponse($response);
-        $user = $this->userRepo->create($data);
-        // create relation for new user and social integration
-        $this->addSocialRelation($user, $serviceName, $response);
-        return $user;
+        $data         = $this->parseServiceResponse($response);
+        $existingUser = $this->userRepo->getByEmail($data['email']);
+        // duplicated user verification
+        if ($existingUser === null) {
+            $user = $this->userRepo->create($data);
+            // create relation for new user and social integration
+            $this->addSocialRelation($user, $serviceName, $response);
+            return $user;
+        } else {
+            session()->put('url.intended', route('register'));
+            throw new SocialException(
+                trans('gzero-social::common.emailAlreadyInUseMessage', ['serviceName' => title_case($serviceName)])
+            );
+        }
     }
 
     /**
@@ -148,7 +160,7 @@ class SocialRepository {
     /**
      * Function parses social service response and prepares user data to insert to database.
      *
-     * @param $response        AbstractUser response data
+     * @param $response AbstractUser response data
      *
      * @return array parsed user data for database insertion
      */
@@ -156,17 +168,21 @@ class SocialRepository {
     {
         $userData = [
             'hasSocialIntegrations' => true,
-            'email'                 => uniqid('social_', true) // set unique email placeholder
+            'nickName'              => $response->getNickname()
         ];
-
+        // set user email if exists (twitter returns as null)
+        if ($response->getEmail()) {
+            $userData['email'] = $response->getEmail();
+        } else {
+            $userData['email'] = uniqid('social_', true); // set unique email placeholder
+        }
+        // set user first and last name
         $name = explode(" ", $response->getName());
         if (count($name) >= 2) {
             $userData['firstName'] = $name[0];
             $userData['lastName']  = $name[1];
-        } else {
-            $userData['firstName'] = 'John';
-            $userData['lastName']  = 'Doe';
         }
+
         return $userData;
     }
 }
