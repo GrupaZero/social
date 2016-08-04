@@ -25,15 +25,15 @@
                 <div class="col-xs-7 col-sm-9 col-md-9">
                     @if(empty(preg_grep('/'.$key.'/', $activeServices)))
                         <p>
-                        @lang(
-                            'gzero-social::common.connectInfo.' . $key,
-                            [
-                            'siteName' => config('gzero.siteName'),
-                            'domain'   => config('gzero.domain')
-                            ]
-                        )
+                            @lang(
+                                'gzero-social::common.connectInfo.' . $key,
+                                [
+                                'siteName' => config('gzero.siteName'),
+                                'domain'   => config('gzero.domain')
+                                ]
+                            )
                         </p>
-                        <a class="btn btn-default connect-btn" href="{{ Url::route('socialLogin',[$key]) }}">
+                        <a class="btn btn-default connect-btn" href="{{ Url::route('socialLogin', [$key]) }}">
                             @lang('gzero-social::common.connect')
                         </a>
                     @else
@@ -49,8 +49,8 @@
 @stop
 @section('footerScripts')
     <script type="text/javascript">
-        $(function () {
-            $('.connect-btn').click(function (event) {
+        $(function() {
+            $('.connect-btn').click(function(event) {
                 Loading.start('#main-container');
             })
         });

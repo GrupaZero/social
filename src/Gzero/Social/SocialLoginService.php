@@ -55,7 +55,10 @@ class SocialLoginService {
             if ($userId) { // This service has already been connected
                 session()->put('url.intended', route('connectedServices'));
                 throw new SocialException(
-                    trans('gzero-social::common.serviceAlreadyConnectedMessage', ['serviceName' => title_case($serviceName)])
+                    trans(
+                        'gzero-social::common.serviceAlreadyConnectedMessage',
+                        ['serviceName' => title_case($serviceName)]
+                    )
                 );
             } else { // create connection for new service
                 $this->repo->addUserSocialAccount($user, $serviceName, $response);
@@ -66,6 +69,8 @@ class SocialLoginService {
             } else { // create new user
                 $user = $this->repo->createNewUser($serviceName, $response);
                 $this->auth->login($user);
+                session()->put('showWelcomePage', true);
+                session()->put('url.intended', route('account.welcome', ['method' => title_case($serviceName)]));
             }
         }
     }
