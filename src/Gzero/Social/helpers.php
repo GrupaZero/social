@@ -41,3 +41,23 @@ if (!function_exists('shareButtons')) {
         )->render();
     }
 }
+
+if (!function_exists('likeButtons')) {
+
+    /**
+     * @param string                      $url
+     * @param ContentTranslationPresenter $translation
+     *
+     * @return mixed
+     */
+    function likeButtons($url, $translation)
+    {
+        return view(
+            'gzero-social::likeButtons',
+            [
+                'url'         => $url,
+                'translation' => $translation,
+            ]
+        )->render();
+    }
+}
