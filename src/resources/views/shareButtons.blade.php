@@ -5,8 +5,7 @@
     <i class="fa fa-google-plus"></i> Google+
 </a>
 <a href="https://pinterest.com/pin/create/bookmarklet/?url={{ $url }}&description={{ $translation->title }}}"
-   class="btn btn-xs btn-default btn-social"
->
+   class="btn btn-xs btn-default btn-social">
     <i class="fa fa-pinterest"></i> Pinterest
 </a>
 

@@ -50,3 +50,13 @@ Set required credentials for given service in services config file
      'client_secret' => 'your client_secret',
  ],
  ```
+ 
+ ### Like buttons credentials
+ 
+ Set app id for given service in services config file
+  
+  ```PHP
+  'facebook' => [
+      'app_id'     => 'your app_id',
+  ],
+  ```
