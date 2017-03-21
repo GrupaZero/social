@@ -19,11 +19,10 @@ class CreateSocial extends Migration {
                 $table->integer('userId')->unsigned()->nullable();
                 $table->string('socialId')->unique();
                 $table->timestamp('createdAt');
-                $table->foreign('userId')->references('id')->on('Users')->onDelete('CASCADE');
             }
         );
         Schema::table(
-            'Users',
+            'users',
             function (Blueprint $table) {
                 $table->boolean('hasSocialIntegrations')->default(0)->after('isAdmin');
             }
