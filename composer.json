@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "gzero/core": "0.*",
-        "gzero/entity": "0.*",
+        "gzero/core": "dev-master@dev",
+        "gzero/entity": "dev-master@dev",
         "gzero/repository": "dev-master@dev",
         "laravel/socialite": "^2.0"
     },

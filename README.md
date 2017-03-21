@@ -24,7 +24,7 @@ php artisan migrate --path=vendor/gzero/social/src/migrations
 ```
 ## Configuration
 
-Add the service provider to platform configuration in `app/config/app.php`
+Add the service provider to platform configuration in `config/app.php`
 
 ```PHP
 'Gzero\Social\ServiceProvider'
