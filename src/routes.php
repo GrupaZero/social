@@ -1,9 +1,9 @@
 <?php
 
-group(
+Route::group(
     ['prefix' => '_hidden'],
-    function () {
-        get(
+    function ($router) {
+        $router->get(
             'social-login/{service}',
             [
                 'as'   => 'socialLogin',
@@ -12,7 +12,7 @@ group(
             ]
         );
 
-        get(
+        $router->get(
             'social-callback/{service}',
             [
                 'as'   => 'socialCallback',
@@ -23,13 +23,13 @@ group(
     }
 );
 
-group(
+Route::group(
     setMultilangRouting(),
     function () {
-        group(
+        Route::group(
             ['prefix' => 'account', 'before' => 'auth'],
-            function () {
-                get(
+            function ($router) {
+                $router->get(
                     'connected-services',
                     [
                         'as'   => 'connectedServices',

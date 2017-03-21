@@ -28,8 +28,8 @@
                             @lang(
                                 'gzero-social::common.connectInfo.' . $key,
                                 [
-                                'siteName' => config('gzero.siteName'),
-                                'domain'   => config('gzero.domain')
+                                'siteName' => config('app.name'),
+                                'domain'   => config('app.name')
                                 ]
                             )
                         </p>

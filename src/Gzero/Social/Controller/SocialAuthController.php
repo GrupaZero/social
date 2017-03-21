@@ -2,7 +2,7 @@
 
 use Gzero\Repository\SocialRepository;
 use Gzero\Social\SocialException;
-use App\Http\Controllers\BaseController;
+use Gzero\Core\Controllers\BaseController;
 use Gzero\Social\SocialLoginService;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
@@ -34,7 +34,6 @@ class SocialAuthController extends BaseController {
 
     public function __construct(Socialite $socialite, SocialLoginService $auth, SocialRepository $socialRepo)
     {
-        parent::__construct();
         $this->socialite   = $socialite;
         $this->repo        = $socialRepo;
         $this->authService = $auth;
