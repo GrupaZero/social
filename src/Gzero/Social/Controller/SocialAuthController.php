@@ -43,7 +43,7 @@ class SocialAuthController extends BaseController {
      *
      * @param $serviceName string social service name
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function socialLogin($serviceName)
     {

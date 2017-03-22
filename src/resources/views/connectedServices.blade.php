@@ -5,7 +5,7 @@
 @stop
 
 @section('sidebarLeft')
-    @include('account.menu', ['menu' => $menu])
+    @include('account.menu')
 @stop
 
 @section('content')
@@ -23,7 +23,7 @@
                     <i class="fa fa-{{ $key }} fa-2x"></i>
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    {{-- TODO why we're using this in view? Now we get collection instead array--}}
+                    {{-- TODO why we're using this in view? --}}
                     @if(empty(preg_grep('/'.$key.'/', $activeServices->toArray())))
                         <p>
                             @lang(
@@ -34,7 +34,7 @@
                                 ]
                             )
                         </p>
-                        <a class="btn btn-default connect-btn" href="{{ Url::route('socialLogin', [$key]) }}">
+                        <a class="btn btn-default connect-btn" href="{{ route('socialLogin', [$key]) }}">
                             @lang('gzero-social::common.connect')
                         </a>
                     @else
