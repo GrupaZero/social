@@ -3,7 +3,7 @@
 use Gzero\Repository\SocialRepository;
 use Gzero\Core\Controllers\BaseController;
 use Gzero\Social\SocialLoginService;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 
@@ -57,11 +57,12 @@ class SocialAuthController extends BaseController {
     /**
      * Function responsible for handle a callback request from the given social service.
      *
-     * @param $serviceName string social service name
+     * @param Request $request     Request object
+     * @param string  $serviceName string social service name
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function socialCallback($serviceName)
+    public function socialCallback(Request $request, $serviceName)
     {
         try {
             $this->setDynamicRedirectUrl($serviceName);
@@ -69,7 +70,7 @@ class SocialAuthController extends BaseController {
             $this->authService->login($serviceName, $user);
             return redirect(session('url.intended', '/'));
         } catch (\Exception $e) {
-            Log::error('Social login failed: ' . $e->getMessage() . ' - ' . print_r(Input::all(), true));
+            Log::error('Social login failed: ' . $e->getMessage() . ' - ' . print_r($request->all(), true));
             if (session()->has('url.intended')) { // If redirect url exists show translated error to the user
                 $reditectUrl = session('url.intended');
                 session()->forget('url.intended'); // remove intended url
@@ -96,11 +97,9 @@ class SocialAuthController extends BaseController {
      */
     public function connectedServices()
     {
-        /**@TODO we need proper user menu method */
-        return \View::make(
+        return view(
             'gzero-social::connectedServices',
             [
-                'menu'           => app()->make('user.menu')->getMenu(),
                 'services'       => config('services'),
                 'activeServices' => $this->repo->getUserSocialIds(auth()->user()->id)
             ]
