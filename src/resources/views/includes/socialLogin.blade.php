@@ -1,5 +1,5 @@
 <div class="separator">
-    <span>@lang('common.loginWith')</span>
+    <span>@lang('common.login_with')</span>
 </div>
 <div class="text-center">
     @if(config('services.facebook.client_secret'))

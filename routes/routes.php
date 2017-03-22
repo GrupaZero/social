@@ -1,7 +1,7 @@
 <?php
 
 Route::group(
-    ['prefix' => '_hidden'],
+    ['middleware' => ['web'], 'prefix' => '_hidden'],
     function ($router) {
         /** @var \Illuminate\Routing\Router $router */
         $router->get(
@@ -29,7 +29,7 @@ Route::group(
     function ($router) {
         /** @var \Illuminate\Routing\Router $router */
         $router->group(
-            ['prefix' => 'account', 'before' => 'auth'],
+            ['middleware' => ['web'], 'prefix' => 'account', 'before' => 'auth'],
             function ($router) {
                 /** @var \Illuminate\Routing\Router $router */
                 $router->get(

@@ -73,11 +73,11 @@ class SocialRepository {
      *
      * @param $userId    int user id
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function getUserSocialIds($userId)
     {
-        return $this->newQB()->where('user_id', '=', $userId)->lists('social_id');
+        return $this->newQB()->where('user_id', '=', $userId)->pluck('social_id');
     }
 
     /**
@@ -95,6 +95,7 @@ class SocialRepository {
         $existingUser = $this->userRepo->getByEmail($data['email']);
         // duplicated user verification
         if ($existingUser === null) {
+            $data['password'] = str_random(40);
             $user = $this->userRepo->create($data);
             // create relation for new user and social integration
             $this->addSocialRelation($user, $serviceName, $response);

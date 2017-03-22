@@ -78,7 +78,8 @@ class ServiceProvider extends AbstractServiceProvider {
      */
     public function addLinksToUserMenu()
     {
-        $this->app['user.menu']->addLink(\URL::route('connectedServices'), \Lang::get('gzero-social::common.connectedServices'));
+        // @TODO Use new menu register
+        $this->app['user.menu']->addLink(route('connectedServices'), trans('gzero-social::common.connected_services'));
     }
 
     /**

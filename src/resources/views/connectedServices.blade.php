@@ -23,7 +23,8 @@
                     <i class="fa fa-{{ $key }} fa-2x"></i>
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    @if(empty(preg_grep('/'.$key.'/', $activeServices)))
+                    {{-- TODO why we're using this in view? Now we get collection instead array--}}
+                    @if(empty(preg_grep('/'.$key.'/', $activeServices->toArray())))
                         <p>
                             @lang(
                                 'gzero-social::common.connect_info.' . $key,
