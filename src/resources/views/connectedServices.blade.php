@@ -29,7 +29,7 @@
                                 'gzero-social::common.connectInfo.' . $key,
                                 [
                                 'siteName' => config('app.name'),
-                                'domain'   => config('app.name')
+                                'domain'   => config('app.url')
                                 ]
                             )
                         </p>
