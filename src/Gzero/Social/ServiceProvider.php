@@ -73,23 +73,13 @@ class ServiceProvider extends AbstractServiceProvider {
     }
 
     /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        parent::register();
-    }
-
-    /**
      * Add additional file to store routes
      *
      * @return void
      */
     protected function registerRoutes()
     {
-        require __DIR__ . '/../../routes.php';
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/routes.php');
     }
 
     /**
@@ -110,4 +100,13 @@ class ServiceProvider extends AbstractServiceProvider {
         require_once __DIR__ . '/helpers.php';
     }
 
+    /**
+     * It registers db migrations
+     *
+     * @return void
+     */
+    protected function registerMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '../../../database/migrations');
+    }
 }

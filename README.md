@@ -20,14 +20,14 @@ composer update
  - create database schema (remember to set env to dev)
  
 ```
-php artisan migrate --path=vendor/gzero/social/src/migrations
+php artisan migrate
 ```
 ## Configuration
 
 Add the service provider to platform configuration in `config/app.php`
 
 ```PHP
-'Gzero\Social\ServiceProvider'
+Gzero\Social\ServiceProvider::class
 ```
 
 ### OAuth credentials
