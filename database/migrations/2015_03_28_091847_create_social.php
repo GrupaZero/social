@@ -13,18 +13,19 @@ class CreateSocial extends Migration {
     public function up()
     {
         Schema::create(
-            'SocialIntegrations',
+            'social_integrations',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('userId')->unsigned()->nullable();
-                $table->string('socialId')->unique();
-                $table->timestamp('createdAt');
+                $table->integer('user_id')->unsigned()->nullable();
+                $table->string('social_id')->unique();
+                $table->timestamp('created_at');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             }
         );
         Schema::table(
             'users',
             function (Blueprint $table) {
-                $table->boolean('hasSocialIntegrations')->default(0)->after('isAdmin');
+                $table->boolean('has_social_integrations')->default(0)->after('is_admin');
             }
         );
     }
@@ -36,11 +37,11 @@ class CreateSocial extends Migration {
      */
     public function down()
     {
-        Schema::drop('SocialIntegrations');
+        Schema::dropIfExists('social_integrations');
         Schema::table(
-            'Users',
+            'users',
             function (Blueprint $table) {
-                $table->dropColumn('hasSocialIntegrations');
+                $table->dropColumn('has_social_integrations');
             }
         );
     }

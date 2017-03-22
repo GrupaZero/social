@@ -53,9 +53,10 @@ class ServiceProvider extends AbstractServiceProvider {
     {
         $viewPath        = __DIR__ . '/../../resources/views';
         $translationPath = __DIR__ . '/../../resources/lang';
+        $this->loadMigrationsFrom(__DIR__ . '/../../../database/migrations');
         $this->loadViewsFrom($viewPath, 'gzero-social');
         $this->loadTranslationsFrom($translationPath, 'gzero-social');
-        $this->registerRoutes();
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/routes.php');
         $this->addLinksToUserMenu();
         $this->publishes(
             [
@@ -70,16 +71,6 @@ class ServiceProvider extends AbstractServiceProvider {
             'lang'
         );
         $this->registerHelpers();
-    }
-
-    /**
-     * Add additional file to store routes
-     *
-     * @return void
-     */
-    protected function registerRoutes()
-    {
-        $this->loadRoutesFrom(__DIR__ . '/../../../routes/routes.php');
     }
 
     /**
@@ -100,13 +91,4 @@ class ServiceProvider extends AbstractServiceProvider {
         require_once __DIR__ . '/helpers.php';
     }
 
-    /**
-     * It registers db migrations
-     *
-     * @return void
-     */
-    protected function registerMigrations()
-    {
-        $this->loadMigrationsFrom(__DIR__ . '../../../database/migrations');
-    }
 }

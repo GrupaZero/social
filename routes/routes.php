@@ -3,6 +3,7 @@
 Route::group(
     ['prefix' => '_hidden'],
     function ($router) {
+        /** @var \Illuminate\Routing\Router $router */
         $router->get(
             'social-login/{service}',
             [
@@ -25,10 +26,12 @@ Route::group(
 
 Route::group(
     setMultilangRouting(),
-    function () {
-        Route::group(
+    function ($router) {
+        /** @var \Illuminate\Routing\Router $router */
+        $router->group(
             ['prefix' => 'account', 'before' => 'auth'],
             function ($router) {
+                /** @var \Illuminate\Routing\Router $router */
                 $router->get(
                     'connected-services',
                     [

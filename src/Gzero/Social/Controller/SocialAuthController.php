@@ -1,7 +1,6 @@
 <?php namespace Gzero\Social\Controller;
 
 use Gzero\Repository\SocialRepository;
-use Gzero\Social\SocialException;
 use Gzero\Core\Controllers\BaseController;
 use Gzero\Social\SocialLoginService;
 use Illuminate\Support\Facades\Input;

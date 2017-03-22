@@ -2,7 +2,6 @@
 
 use Gzero\Entity\User;
 use Gzero\Social\SocialException;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Query\Builder;
 use Laravel\Socialite\AbstractUser;
 
@@ -23,7 +22,7 @@ class SocialRepository {
     /**
      * @var string
      */
-    private $table = 'SocialIntegrations';
+    private $table = 'social_integrations';
     /**
      * @var Builder
      */
@@ -53,7 +52,7 @@ class SocialRepository {
      */
     public function getSocialId($socialId)
     {
-        return $this->newQB()->where('socialId', '=', $socialId)->first();
+        return $this->newQB()->where('social_id', '=', $socialId)->first();
     }
 
     /**
@@ -66,7 +65,7 @@ class SocialRepository {
      */
     public function getUserIdBySocialId($socialId, $serviceName)
     {
-        return $this->newQB()->where('socialId', '=', $serviceName . '_' . $socialId)->value('userId');
+        return $this->newQB()->where('social_id', '=', $serviceName . '_' . $socialId)->value('user_id');
     }
 
     /**
@@ -78,7 +77,7 @@ class SocialRepository {
      */
     public function getUserSocialIds($userId)
     {
-        return $this->newQB()->where('userId', '=', $userId)->lists('socialId');
+        return $this->newQB()->where('user_id', '=', $userId)->lists('social_id');
     }
 
     /**
@@ -119,7 +118,7 @@ class SocialRepository {
      */
     public function addUserSocialAccount(User $user, $serviceName, AbstractUser $response)
     {
-        $user->hasSocialIntegrations = true;
+        $user->has_social_integrations = true;
         $user->save();
         // create relation for new user and social integration
         $this->addSocialRelation($user, $serviceName, $response);
@@ -140,9 +139,9 @@ class SocialRepository {
         // create relation for new user and social integration
         return $this->newQB()->insert(
             [
-                'userId'    => $user->id,
-                'socialId'  => $serviceName . '_' . $response->id,
-                'createdAt' => \DB::raw('NOW()')
+                'user_id'    => $user->id,
+                'social_id'  => $serviceName . '_' . $response->id,
+                'created_at' => \DB::raw('NOW()')
             ]
         );
     }
@@ -167,8 +166,8 @@ class SocialRepository {
     private function parseServiceResponse(AbstractUser $response)
     {
         $userData = [
-            'hasSocialIntegrations' => true,
-            'nickName'              => $response->getNickname()
+            'has_social_integrations' => true,
+            'nick'                    => $response->getNickname()
         ];
         // set user email if exists (twitter returns as null)
         if ($response->getEmail()) {
@@ -179,8 +178,8 @@ class SocialRepository {
         // set user first and last name
         $name = explode(" ", $response->getName());
         if (count($name) >= 2) {
-            $userData['firstName'] = $name[0];
-            $userData['lastName']  = $name[1];
+            $userData['first_name'] = $name[0];
+            $userData['last_name']  = $name[1];
         }
 
         return $userData;

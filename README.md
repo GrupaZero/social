@@ -8,9 +8,9 @@ Begin by installing this package through Composer. Edit your project's composer.
 
 ```json
 "require": {
-    "gzero/social": "dev-master",
+    "gzero/social": "2.*",
 },
-"minimum-stability" : "dev"
+"minimum-stability" : "stable"
 ```
 Next, update Composer from the Terminal:
 
