@@ -102,7 +102,7 @@ class SocialRepository {
         } else {
             session()->put('url.intended', route('register'));
             throw new SocialException(
-                trans('gzero-social::common.emailAlreadyInUseMessage', ['serviceName' => title_case($serviceName)])
+                trans('gzero-social::common.email_already_in_use_message', ['service_name' => title_case($serviceName)])
             );
         }
     }

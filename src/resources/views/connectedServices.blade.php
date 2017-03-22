@@ -1,7 +1,7 @@
 @extends('layouts.sidebarLeft')
 
 @section('title')
-    @lang('gzero-social::common.connectedServices')
+    @lang('gzero-social::common.connected_services')
 @stop
 
 @section('sidebarLeft')
@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-    <h1 class="page-header">@lang('gzero-social::common.connectedServices')</h1>
+    <h1 class="page-header">@lang('gzero-social::common.connected_services')</h1>
 
     @foreach($services as $key => $service)
         @if(isset($service['client_secret']))
@@ -26,10 +26,10 @@
                     @if(empty(preg_grep('/'.$key.'/', $activeServices)))
                         <p>
                             @lang(
-                                'gzero-social::common.connectInfo.' . $key,
+                                'gzero-social::common.connect_info.' . $key,
                                 [
-                                'siteName' => config('app.name'),
-                                'domain'   => config('app.url')
+                                'site_name' => config('app.name'),
+                                'domain'   => config('gzero.domain')
                                 ]
                             )
                         </p>

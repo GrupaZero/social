@@ -56,8 +56,8 @@ class SocialLoginService {
                 session()->put('url.intended', route('connectedServices'));
                 throw new SocialException(
                     trans(
-                        'gzero-social::common.serviceAlreadyConnectedMessage',
-                        ['serviceName' => title_case($serviceName)]
+                        'gzero-social::common.service_already_connected_message',
+                        ['service_name' => title_case($serviceName)]
                     )
                 );
             } else { // create connection for new service
