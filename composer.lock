@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb646936ba02b35db9c475ae09346dcb",
+    "content-hash": "c7bc7bb4b7e60c9d2e45d1cb98ddf02e",
     "packages": [
         {
             "name": "bkwld/croppa",
@@ -460,12 +460,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrupaZero/core.git",
-                "reference": "6beb3050c79c5e83ec5ce4bad1f50397c8ff9ec2"
+                "reference": "a430eab35abde68f917b5ae8bc3f54cc43834ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrupaZero/core/zipball/6beb3050c79c5e83ec5ce4bad1f50397c8ff9ec2",
-                "reference": "6beb3050c79c5e83ec5ce4bad1f50397c8ff9ec2",
+                "url": "https://api.github.com/repos/GrupaZero/core/zipball/a430eab35abde68f917b5ae8bc3f54cc43834ee9",
+                "reference": "a430eab35abde68f917b5ae8bc3f54cc43834ee9",
                 "shasum": ""
             },
             "require": {
@@ -498,7 +498,7 @@
                     "email": "adrian.skierniewski@gmail.com"
                 }
             ],
-            "time": "2017-03-20 08:26:22"
+            "time": "2017-03-22 18:46:11"
         },
         {
             "name": "gzero/eloquent-tree",
@@ -555,12 +555,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrupaZero/entity.git",
-                "reference": "06b7e6f930658067be1e0e420e9bfe82ba924763"
+                "reference": "d8d248574d4804ebf10e951c5c1a02a2014843d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrupaZero/entity/zipball/06b7e6f930658067be1e0e420e9bfe82ba924763",
-                "reference": "06b7e6f930658067be1e0e420e9bfe82ba924763",
+                "url": "https://api.github.com/repos/GrupaZero/entity/zipball/d8d248574d4804ebf10e951c5c1a02a2014843d6",
+                "reference": "d8d248574d4804ebf10e951c5c1a02a2014843d6",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
                     "email": "adrian.skierniewski@gmail.com"
                 }
             ],
-            "time": "2017-03-19 14:52:08"
+            "time": "2017-03-22 16:56:10"
         },
         {
             "name": "gzero/repository",
@@ -1545,16 +1545,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.36",
+            "version": "1.0.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297"
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
-                "reference": "d9c1698582dfbfbd092ec9c5c3325f862cdb3297",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
+                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
                 "shasum": ""
             },
             "require": {
@@ -1624,7 +1624,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-03-18T16:02:30+00:00"
+            "time": "2017-03-22T15:43:14+00:00"
         },
         {
             "name": "league/oauth1-client",

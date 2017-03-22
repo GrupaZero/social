@@ -1,5 +1,6 @@
 <?php namespace Gzero\Social;
 
+use Gzero\Core\Menu\Link;
 use Gzero\Core\AbstractServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\SocialiteServiceProvider;
@@ -78,7 +79,8 @@ class ServiceProvider extends AbstractServiceProvider {
      */
     public function addLinksToUserMenu()
     {
-        app('gzero.menu.account')->addLink(route('connectedServices'), trans('gzero-social::common.connected_services'));
+        app('gzero.menu.account')
+            ->add(new Link(route('connectedServices'), trans('gzero-social::common.connected_services'), 999));
     }
 
     /**
