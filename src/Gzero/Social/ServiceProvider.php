@@ -1,5 +1,6 @@
 <?php namespace Gzero\Social;
 
+use Gzero\Core\Menu\Link;
 use Gzero\Core\AbstractServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\SocialiteServiceProvider;
@@ -53,9 +54,10 @@ class ServiceProvider extends AbstractServiceProvider {
     {
         $viewPath        = __DIR__ . '/../../resources/views';
         $translationPath = __DIR__ . '/../../resources/lang';
+        $this->loadMigrationsFrom(__DIR__ . '/../../../database/migrations');
         $this->loadViewsFrom($viewPath, 'gzero-social');
         $this->loadTranslationsFrom($translationPath, 'gzero-social');
-        $this->registerRoutes();
+        $this->loadRoutesFrom(__DIR__ . '/../../../routes/routes.php');
         $this->addLinksToUserMenu();
         $this->publishes(
             [
@@ -73,31 +75,12 @@ class ServiceProvider extends AbstractServiceProvider {
     }
 
     /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        parent::register();
-    }
-
-    /**
-     * Add additional file to store routes
-     *
-     * @return void
-     */
-    protected function registerRoutes()
-    {
-        require __DIR__ . '/../../routes.php';
-    }
-
-    /**
      * Add additional links to user account menu
      */
     public function addLinksToUserMenu()
     {
-        $this->app['user.menu']->addLink(\URL::route('connectedServices'), \Lang::get('gzero-social::common.connectedServices'));
+        app('gzero.menu.account')
+            ->add(new Link(route('connectedServices'), trans('gzero-social::common.connected_services'), 999));
     }
 
     /**

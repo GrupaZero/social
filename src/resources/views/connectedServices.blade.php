@@ -1,15 +1,15 @@
 @extends('layouts.sidebarLeft')
 
 @section('title')
-    @lang('gzero-social::common.connectedServices')
+    @lang('gzero-social::common.connected_services')
 @stop
 
 @section('sidebarLeft')
-    @include('account.menu', ['menu' => $menu])
+    @include('account.menu')
 @stop
 
 @section('content')
-    <h1 class="page-header">@lang('gzero-social::common.connectedServices')</h1>
+    <h1 class="page-header">@lang('gzero-social::common.connected_services')</h1>
 
     @foreach($services as $key => $service)
         @if(isset($service['client_secret']))
@@ -23,17 +23,18 @@
                     <i class="fa fa-{{ $key }} fa-2x"></i>
                 </div>
                 <div class="col-xs-7 col-sm-9 col-md-9">
-                    @if(empty(preg_grep('/'.$key.'/', $activeServices)))
+                    {{-- TODO why we're using this in view? --}}
+                    @if(empty(preg_grep('/'.$key.'/', $activeServices->toArray())))
                         <p>
                             @lang(
-                                'gzero-social::common.connectInfo.' . $key,
+                                'gzero-social::common.connect_info.' . $key,
                                 [
-                                'siteName' => config('gzero.siteName'),
+                                'site_name' => config('app.name'),
                                 'domain'   => config('gzero.domain')
                                 ]
                             )
                         </p>
-                        <a class="btn btn-default connect-btn" href="{{ Url::route('socialLogin', [$key]) }}">
+                        <a class="btn btn-default connect-btn" href="{{ route('socialLogin', [$key]) }}">
                             @lang('gzero-social::common.connect')
                         </a>
                     @else

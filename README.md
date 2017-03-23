@@ -8,9 +8,9 @@ Begin by installing this package through Composer. Edit your project's composer.
 
 ```json
 "require": {
-    "gzero/social": "dev-master",
+    "gzero/social": "2.*",
 },
-"minimum-stability" : "dev"
+"minimum-stability" : "stable"
 ```
 Next, update Composer from the Terminal:
 
@@ -20,14 +20,14 @@ composer update
  - create database schema (remember to set env to dev)
  
 ```
-php artisan migrate --path=vendor/gzero/social/src/migrations
+php artisan migrate
 ```
 ## Configuration
 
-Add the service provider to platform configuration in `app/config/app.php`
+Add the service provider to platform configuration in `config/app.php`
 
 ```PHP
-'Gzero\Social\ServiceProvider'
+Gzero\Social\ServiceProvider::class
 ```
 
 ### OAuth credentials
@@ -53,10 +53,10 @@ Set required credentials for given service in services config file
  
  ### Like buttons credentials
  
- Set app id for given service in services config file
+ Set only client_id for given service in services config file
   
   ```PHP
   'facebook' => [
-      'app_id'     => 'your app_id',
+      'client_id'     => 'your client_id',
   ],
   ```
