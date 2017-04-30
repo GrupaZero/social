@@ -8,7 +8,7 @@ Begin by installing this package through Composer. Edit your project's composer.
 
 ```json
 "require": {
-    "gzero/social": "2.*",
+    "gzero/social": "3.*",
 },
 "minimum-stability" : "stable"
 ```
