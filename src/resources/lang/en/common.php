@@ -17,4 +17,9 @@ return [
     ],
     'email_already_in_use_message'      => 'User with this email is already registered, please log in and connect this :service_name
     account from the panel of the user.',
+    'share_button' => [
+        'facebook' => 'Share on Facebook.',
+        'google_plus' => 'Share on Google Plus.',
+        'pinterest' => 'Share on Pinterest.'
+    ]
 ];

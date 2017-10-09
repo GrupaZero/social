@@ -1,13 +1,13 @@
-<a href="http://www.facebook.com/sharer.php?u={{ $url }}" title="{{ $translation->title }}"
+<a href="http://www.facebook.com/sharer.php?u={{ $url }}" title="@lang('gzero-social::common.share_button.facebook')"
    class="btn btn-primary btn-xs btn-social">
     <i aria-hidden="true" class="fa fa-facebook-square"></i> Facebook
 </a>
-<a href="https://plus.google.com/share?url={{ $url }}" title="{{ $translation->title }}"
+<a href="https://plus.google.com/share?url={{ $url }}" title="@lang('gzero-social::common.share_button.google_plus')"
    class="btn btn-danger btn-xs btn-social">
     <i aria-hidden="true" class="fa fa-google-plus"></i> Google+
 </a>
 <a href="https://pinterest.com/pin/create/bookmarklet/?url={{ $url }}&description={{ urlencode($translation->title) }}"
-   title="{{ $translation->title }}" class="btn btn-xs btn-default btn-social">
+   title="@lang('gzero-social::common.share_button.pinterest')" class="btn btn-xs btn-default btn-social">
     <i aria-hidden="true" class="fa fa-pinterest"></i> Pinterest
 </a>
 
