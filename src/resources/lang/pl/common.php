@@ -17,4 +17,9 @@ return [
     ],
     'email_already_in_use_message'          => 'Użytkownik z tym adresem e-mail jest już zarejestrowany, zaloguj się i połącz konto
     (:service_name) z panelu tego użytkownika.',
+    'share_button' => [
+        'facebook' => 'Udostępnij na Facebook\'u.',
+        'google_plus' => 'Udostępnij na Google Plus.',
+        'pinterest' => 'Udostępnij na Pinterest.'
+    ]
 ];

@@ -1,12 +1,14 @@
-<a href="http://www.facebook.com/sharer.php?u={{ $url }}" class="btn btn-primary btn-xs btn-social">
-    <i class="fa fa-facebook-square"></i> Facebook
+<a href="http://www.facebook.com/sharer.php?u={{ $url }}" title="@lang('gzero-social::common.share_button.facebook')"
+   class="btn btn-primary btn-xs btn-social">
+    <i aria-hidden="true" class="fa fa-facebook-square"></i> Facebook
 </a>
-<a href="https://plus.google.com/share?url={{ $url }}" class="btn btn-danger btn-xs btn-social">
-    <i class="fa fa-google-plus"></i> Google+
+<a href="https://plus.google.com/share?url={{ $url }}" title="@lang('gzero-social::common.share_button.google_plus')"
+   class="btn btn-danger btn-xs btn-social">
+    <i aria-hidden="true" class="fa fa-google-plus"></i> Google+
 </a>
-<a href="https://pinterest.com/pin/create/bookmarklet/?url={{ $url }}&description={{ $translation->title }}}"
-   class="btn btn-xs btn-default btn-social">
-    <i class="fa fa-pinterest"></i> Pinterest
+<a href="https://pinterest.com/pin/create/bookmarklet/?url={{ $url }}&description={{ urlencode($translation->title) }}"
+   title="@lang('gzero-social::common.share_button.pinterest')" class="btn btn-xs btn-default btn-social">
+    <i aria-hidden="true" class="fa fa-pinterest"></i> Pinterest
 </a>
 
 @section('footerScripts')
